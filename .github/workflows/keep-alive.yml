@@ -2,8 +2,8 @@ name: Keep Flask API Alive
 
 on:
   schedule:
-    # Run every 10 minutes (*/10 means every 10 minutes)
-    - cron: '*/10 * * * *'
+    # Run every 5 minutes (*/5 means every 5 minutes)
+    - cron: '*/5 * * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 jobs:
