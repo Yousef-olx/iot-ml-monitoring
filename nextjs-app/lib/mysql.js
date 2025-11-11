@@ -7,7 +7,7 @@ const pool = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT || 27906,
   ssl: {
-    rejectUnauthorized: true
+    rejectUnauthorized: false  // Allow Aiven SSL without CA certificate
   },
   waitForConnections: true,
   connectionLimit: 10,
