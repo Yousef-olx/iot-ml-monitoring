@@ -19,17 +19,13 @@ export default async function handler(req, res) {
     const hum = parseFloat(humidity || 50.0);
     const timestamp = new Date();
 
-    // 0. Check if equipment exists, if not use default equipment
-    const equipmentCheck = await query(
-      `SELECT EquipmentID FROM equipment WHERE EquipmentID = ?`,
-      [equipmentId]
+    // 0. Auto-create equipment if it doesn't exist
+    await query(
+      `INSERT INTO equipment (EquipmentID, Name, Type, Location, InstallationDate, Status) 
+       VALUES (?, ?, ?, ?, ?, ?) 
+       ON DUPLICATE KEY UPDATE EquipmentID = EquipmentID`,
+      [equipmentId, `Equipment ${equipmentId}`, 'Auto', 'Unknown', timestamp.toISOString().split('T')[0], 'Active']
     );
-    
-    if (equipmentCheck.length === 0) {
-      return res.status(400).json({ 
-        error: `Equipment ID ${equipmentId} does not exist. Please use IDs 1, 2, or 3.` 
-      });
-    }
 
     // 1. Save to MySQL
     const result = await query(
