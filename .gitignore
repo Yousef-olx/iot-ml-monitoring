@@ -19,7 +19,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables (NEVER push passwords!)
+# Environment variables 
 .env
 .env.local
 .env.*.local
@@ -49,17 +49,4 @@ logs/
 # rf_model.pkl
 # scaler.pkl
 
-# CSV data files (training data - not needed on server)
-*.csv
-equipment_anomaly_data*.csv
 
-# Batch files (only for local use)
-*.bat
-start.bat
-start_services.bat
-
-# Extra documentation (not needed on server)
-AIVEN_SETUP.md
-SETUP_GUIDE_EASY.md
-HOW_TO_START.txt
-MLtest.py
