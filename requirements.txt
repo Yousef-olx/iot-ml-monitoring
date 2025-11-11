@@ -1,4 +1,5 @@
 # Flask API Dependencies (Python 3.11 compatible versions)
+setuptools>=65.0.0
 Flask==3.0.0
 Flask-CORS==4.0.0
 joblib==1.3.2
