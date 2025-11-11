@@ -80,9 +80,14 @@ Branch: main
 Root Directory: (leave EMPTY)
 Runtime: Python 3
 Build Command: pip install -r requirements.txt
-Start Command: gunicorn flask_api:app
+Start Command: gunicorn -w 1 -b 0.0.0.0:$PORT flask_api:app
 Instance Type: Free
 ```
+
+**⚠️ IMPORTANT:** 
+- Use `-w 1` (single worker) for free tier
+- Use `$PORT` (Render assigns this automatically)
+- Make sure "Instance Type" is set to **Free**
 
 4. Click **"Create Web Service"**
 
@@ -93,7 +98,7 @@ Instance Type: Free
 Once deployed (shows "Live" ✅), copy your URL:
 
 ```
-https://iot-ml-api-XXXX.onrender.com
+https://iot-ml-monitoring.onrender.com
 ```
 
 **📝 SAVE THIS!** You need it for Next.js
