@@ -19,15 +19,16 @@ export default async function handler(req, res) {
     const hum = parseFloat(humidity || 50.0);
     const timestamp = new Date();
 
-    // 0. Ensure equipment exists in database
-    try {
-      await query(
-        `INSERT IGNORE INTO equipment (EquipmentID, Name, Type, Location, InstallationDate, Status) 
-         VALUES (?, ?, ?, ?, ?, ?)`,
-        [equipmentId, `Equipment ${equipmentId}`, 'Generic', 'Default Location', timestamp.toISOString().split('T')[0], 'Active']
-      );
-    } catch (eqError) {
-      console.log('Equipment check:', eqError.message);
+    // 0. Check if equipment exists, if not use default equipment
+    const equipmentCheck = await query(
+      `SELECT EquipmentID FROM equipment WHERE EquipmentID = ?`,
+      [equipmentId]
+    );
+    
+    if (equipmentCheck.length === 0) {
+      return res.status(400).json({ 
+        error: `Equipment ID ${equipmentId} does not exist. Please use IDs 1, 2, or 3.` 
+      });
     }
 
     // 1. Save to MySQL
