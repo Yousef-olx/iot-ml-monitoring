@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables (NEVER push passwords!)
+.env
+.env.local
+.env.*.local
+.env.production
+nextjs-app/.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Model files (keep these for deployment)
+# rf_model.pkl
+# scaler.pkl
+
+# CSV data files (training data - not needed on server)
+*.csv
+equipment_anomaly_data*.csv
+
+# Batch files (only for local use)
+*.bat
+start.bat
+start_services.bat
+
+# Extra documentation (not needed on server)
+AIVEN_SETUP.md
+SETUP_GUIDE_EASY.md
+HOW_TO_START.txt
+MLtest.py
