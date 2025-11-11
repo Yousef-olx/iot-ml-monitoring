@@ -3,7 +3,7 @@ import { query } from '../../../lib/mysql';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      const equipment = await query(`SELECT * FROM Equipment ORDER BY CreatedAt DESC`);
+      const equipment = await query(`SELECT * FROM equipment ORDER BY EquipmentID DESC`);
       res.status(200).json({ success: true, data: equipment, count: equipment.length });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     try {
       const { name, type, location, installationDate } = req.body;
       const result = await query(
-        `INSERT INTO Equipment (Name, Type, Location, InstallationDate, Status) VALUES (?, ?, ?, ?, 'Active')`,
+        `INSERT INTO equipment (Name, Type, Location, InstallationDate, Status) VALUES (?, ?, ?, ?, 'Active')`,
         [name, type, location || null, installationDate || new Date()]
       );
       res.status(200).json({ success: true, id: result.insertId });
