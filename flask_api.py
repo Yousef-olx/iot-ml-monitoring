@@ -17,6 +17,14 @@ CORS(app)  # Enable CORS for Next.js to call this API
 model = None
 scaler = None
 
+# Load model immediately when module is imported (for gunicorn)
+def init_app():
+    """Initialize the application - called on module import"""
+    global model, scaler
+    if model is None:
+        print("Initializing Flask app and loading model...")
+        load_model()
+
 def load_model():
     """Load the trained model and scaler"""
     global model, scaler
@@ -309,3 +317,6 @@ if __name__ == '__main__':
     else:
         print("\nFailed to load model. Please run 'python predict_fast.py' first.")
         print("="*60)
+
+# Initialize app when imported by gunicorn
+init_app()
