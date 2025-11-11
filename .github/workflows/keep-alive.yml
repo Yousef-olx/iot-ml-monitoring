@@ -1,0 +1,23 @@
+name: Keep Flask API Alive
+
+on:
+  schedule:
+    # Run every 10 minutes (*/10 means every 10 minutes)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Ping Flask API Health Endpoint
+        run: |
+          echo "Pinging Flask API to keep it awake..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://iot-ml-monitoring-4.onrender.com/health)
+          echo "Response code: $response"
+          if [ $response -eq 200 ]; then
+            echo "✅ API is alive!"
+          else
+            echo "⚠️ API returned status: $response"
+          fi
