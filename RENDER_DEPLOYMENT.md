@@ -79,12 +79,13 @@ Region: Oregon (US West) or closest to you
 Branch: main
 Root Directory: (leave EMPTY)
 Runtime: Python 3
-Build Command: pip install -r requirements.txt
+Build Command: pip install --only-binary=:all: -r requirements.txt
 Start Command: gunicorn -w 1 -b 0.0.0.0:$PORT flask_api:app
 Instance Type: Free
 ```
 
 **⚠️ IMPORTANT:** 
+- Build Command uses `--only-binary=:all:` to avoid compilation errors
 - Use `-w 1` (single worker) for free tier
 - Use `$PORT` (Render assigns this automatically)
 - Make sure "Instance Type" is set to **Free**
